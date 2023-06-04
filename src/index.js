@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import emailjs from 'emailjs-com';
+
 
 const App = () => {
   const [image, setImage] = useState('');
@@ -25,7 +27,7 @@ const App = () => {
     setTimeout(() => {
       clearInterval(timer);
       setIsTimeUp(true);
-    }, 5000); // 5000 milliseconds = 5 seconds
+    }, 300000); // 300000 milliseconds = 5 minutes
 
     return () => {
       clearInterval(timer);
@@ -41,13 +43,21 @@ const App = () => {
   };
 
   const sendEmail = () => {
-    // Simulate sending the email
-    // This is just a mock implementation and won't actually send an email
-    console.log('Sending email to:', email);
-    console.log('Text:', text);
-
-    // Set email sent state to true
-    setIsEmailSent(true);
+    const templateParams = {
+      from_email: email,
+      to_email: email, // Send the email to the user-provided email address
+      userText: text, // Pass the user's text as the template parameter
+    };
+  
+    emailjs
+      .send('service_chwt4ld', 'template_wy617zg', templateParams, 'fUdLpu-M23Eyc2Doq')
+      .then((response) => {
+        console.log('Email sent:', response.status);
+        setIsEmailSent(true);
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error);
+      });
   };
 
   return (
