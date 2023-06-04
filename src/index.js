@@ -6,7 +6,7 @@ import './styles.css'; // Import custom CSS file for styling
 const App = () => {
   const [image, setImage] = useState('');
   const [text, setText] = useState('');
-  const [timeRemaining, setTimeRemaining] = useState(300); // 300 seconds = 5 minutes
+  const [timeRemaining, setTimeRemaining] = useState(60); // 60 seconds = 1 minute
   const [isTimeUp, setIsTimeUp] = useState(false);
   const [email, setEmail] = useState('');
   const [isEmailSent, setIsEmailSent] = useState(false);
@@ -28,7 +28,7 @@ const App = () => {
     setTimeout(() => {
       clearInterval(timer);
       setIsTimeUp(true);
-    }, 300000); // 300000 milliseconds = 5 minutes
+    }, 60000); // 60000 milliseconds = 1 minute
 
     return () => {
       clearInterval(timer);
